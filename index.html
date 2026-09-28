@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f46c3a" />
+    <meta name="description" content="BiteWise helps you decide what to eat today." />
+    <title>BiteWise | Your next meal, figured out.</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="BiteWise home">
+        <span class="brand-mark" aria-hidden="true">B</span>
+        <span>BiteWise</span>
+      </a>
+      <button class="location-pill" id="location-selector" type="button" title="Choose a saved Swiggy delivery address">
+        <span aria-hidden="true">⌖</span>
+        <span>Choose location</span>
+        <span class="location-chevron" aria-hidden="true">⌄</span>
+      </button>
+      <div class="address-popover" id="address-panel" hidden>
+        <div class="popover-heading">
+          <span class="section-kicker">Delivery</span>
+          <h2 id="address-title">Choose a Swiggy address</h2>
+        </div>
+        <p class="auth-copy">Select one of your saved Swiggy delivery addresses.</p>
+        <div class="address-list" id="address-list"></div>
+        <p class="auth-feedback" id="address-feedback" role="status"></p>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="auth-gate content-width" id="auth-gate" aria-labelledby="auth-gate-title">
+        <span class="section-kicker">Start here</span>
+        <h2 id="auth-gate-title">Connect your Swiggy account.</h2>
+        <p>Sign in securely with Swiggy before choosing a delivery address and finding food nearby.</p>
+        <button class="primary-button auth-start-button" id="auth-start" type="button">Continue with Swiggy <span aria-hidden="true">↗</span></button>
+        <p class="auth-feedback" id="auth-gate-feedback" role="status"></p>
+      </section>
+
+      <div id="app-content" hidden>
+      <section class="hero content-width" aria-labelledby="page-title">
+        <div class="eyebrow"><span class="spark" aria-hidden="true">✦</span> A little help for hungry days</div>
+        <h1 id="page-title">What are you<br /><em>craving</em> today?</h1>
+        <p class="hero-copy">Tell us what sounds good and we’ll find a few delicious directions to take.</p>
+        <div class="hero-art" aria-hidden="true">
+          <div class="art-note note-one">Good food<br />starts here</div>
+          <div class="art-note note-two">made for<br />your mood</div>
+          <img src="https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=1100&q=82" alt="" />
+          <div class="art-sticker">Pick<br /><strong>your bite</strong></div>
+        </div>
+      </section>
+
+      <section class="preferences content-width" aria-labelledby="preferences-title">
+        <div class="section-heading">
+          <div>
+            <span class="section-kicker">01 / 04</span>
+            <h2 id="preferences-title">Set your mood</h2>
+          </div>
+          <span class="demo-badge" id="mode-badge"><span class="status-dot"></span> Swiggy live only</span>
+        </div>
+
+        <form id="preference-form" novalidate>
+          <fieldset class="preference-group">
+            <legend>What’s your budget?</legend>
+            <div class="budget-input-wrap">
+              <span aria-hidden="true">₹</span>
+              <input id="budget-input" name="budget" type="number" min="1" step="1" inputmode="numeric" placeholder="300" aria-label="Budget in Indian rupees" />
+            </div>
+            <p class="field-hint">Maximum amount for one food item.</p>
+          </fieldset>
+
+          <fieldset class="preference-group">
+            <legend>What’s your food style?</legend>
+            <div class="chip-grid" id="dietary-options">
+              <label class="chip-choice"><input type="radio" name="dietary" value="vegetarian" /><span>Veg</span></label>
+              <label class="chip-choice"><input type="radio" name="dietary" value="non-vegetarian" /><span>Non-Veg</span></label>
+              <label class="chip-choice"><input type="radio" name="dietary" value="none" checked /><span>No preference</span></label>
+            </div>
+          </fieldset>
+
+          <fieldset class="preference-group">
+            <legend>What sounds good?</legend>
+            <div class="option-grid craving-grid">
+              <label class="choice-card"><input type="radio" name="craving" value="spicy" /><span><span class="choice-icon">♨</span> Spicy</span></label>
+              <label class="choice-card"><input type="radio" name="craving" value="comfort" /><span><span class="choice-icon">♡</span> Comfort food</span></label>
+              <label class="choice-card"><input type="radio" name="craving" value="healthy" /><span><span class="choice-icon">⌁</span> Healthy</span></label>
+              <label class="choice-card"><input type="radio" name="craving" value="sweet" /><span><span class="choice-icon">✣</span> Something sweet</span></label>
+              <label class="choice-card"><input type="radio" name="craving" value="quick" /><span><span class="choice-icon">↯</span> Quick meal</span></label>
+              <label class="choice-card"><input type="radio" name="craving" value="surprise" /><span><span class="choice-icon">?</span> Surprise me</span></label>
+            </div>
+          </fieldset>
+
+          <fieldset class="preference-group">
+            <legend>Which meal are we solving?</legend>
+            <div class="meal-grid">
+              <label class="meal-choice"><input type="radio" name="meal" value="breakfast" /><span class="meal-icon">☼</span><span>Breakfast</span></label>
+              <label class="meal-choice"><input type="radio" name="meal" value="lunch" /><span class="meal-icon">◒</span><span>Lunch</span></label>
+              <label class="meal-choice"><input type="radio" name="meal" value="snacks" /><span class="meal-icon">◌</span><span>Snacks</span></label>
+              <label class="meal-choice"><input type="radio" name="meal" value="dinner" /><span class="meal-icon">☾</span><span>Dinner</span></label>
+            </div>
+          </fieldset>
+
+          <p class="form-error" id="form-error" role="alert" hidden>Please choose a budget, craving, and meal type to continue.</p>
+          <button class="primary-button" type="submit">Find my food <span aria-hidden="true">→</span></button>
+        </form>
+      </section>
+
+      <section class="auth-section content-width" aria-labelledby="auth-title">
+        <div class="auth-heading">
+          <div>
+            <span class="section-kicker">Connection</span>
+            <h2 id="auth-title">Swiggy MCP access</h2>
+          </div>
+          <span class="auth-status" id="auth-status"><span class="status-dot"></span> Checking</span>
+        </div>
+        <p class="auth-copy">Live food results require server-side Swiggy MCP authentication. Your credential is never entered into or sent from this page.</p>
+        <div class="auth-config">
+          <span>Set this environment variable before starting BiteWise:</span>
+          <code>SWIGGY_MCP_BEARER_TOKEN</code>
+        </div>
+        <p class="auth-feedback" id="auth-feedback" role="status"></p>
+        <button class="secondary-button auth-refresh" id="auth-refresh" type="button">Connect Swiggy <span aria-hidden="true">↗</span></button>
+      </section>
+
+      <section class="results content-width" id="results" aria-live="polite" hidden>
+        <div class="results-header">
+          <div>
+            <span class="section-kicker">Your shortlist</span>
+            <h2>Here’s what feels right.</h2>
+          </div>
+          <button class="edit-button" id="edit-preferences" type="button">← Edit picks</button>
+        </div>
+        <div class="summary-row" id="selection-summary"></div>
+        <div class="results-state" id="results-state">
+          <span class="loader" aria-hidden="true"></span>
+          <p>Searching Swiggy...</p>
+        </div>
+        <div class="recommendation-list" id="recommendation-list"></div>
+        <div class="empty-state" id="empty-state" hidden>
+          <div class="empty-icon" aria-hidden="true">✦</div>
+          <h3 id="empty-title">Swiggy results unavailable.</h3>
+          <p id="empty-copy">BiteWise could not reach Swiggy Food MCP. No sample data is shown.</p>
+          <button class="secondary-button" id="empty-edit" type="button">Adjust my picks</button>
+        </div>
+      </section>
+      </div>
+    </main>
+
+    <div class="order-modal" id="order-modal" hidden>
+      <div class="order-dialog" role="dialog" aria-modal="true" aria-labelledby="order-title">
+        <button class="modal-close" id="order-close" type="button" aria-label="Close order review">×</button>
+        <span class="section-kicker">Swiggy checkout</span>
+        <h2 id="order-title">Review your order</h2>
+        <div id="order-body"></div>
+        <p class="order-feedback" id="order-feedback" role="alert"></p>
+      </div>
+    </div>
+
+    <footer class="site-footer content-width">
+      <span>BiteWise</span>
+      <span>Made for the “what should I eat?” moment.</span>
+    </footer>
+    <script src="app.js"></script>
+  </body>
+</html>
